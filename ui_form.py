@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLayout,
-    QLineEdit, QPushButton, QSizePolicy, QSpinBox,
-    QTextEdit, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QHBoxLayout, QLabel,
+    QLayout, QLineEdit, QPushButton, QSizePolicy,
+    QSpinBox, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -262,6 +262,41 @@ class Ui_Widget(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_8)
 
+        self.horizontalLayout_10 = QHBoxLayout()
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_4 = QLabel(self.verticalLayoutWidget_3)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout_10.addWidget(self.label_4)
+
+        self.spinBox_jieqi = QSpinBox(self.verticalLayoutWidget_3)
+        self.spinBox_jieqi.setObjectName(u"spinBox_jieqi")
+
+        self.horizontalLayout_10.addWidget(self.spinBox_jieqi)
+
+        self.pushButton_jieqi = QPushButton(self.verticalLayoutWidget_3)
+        self.pushButton_jieqi.setObjectName(u"pushButton_jieqi")
+
+        self.horizontalLayout_10.addWidget(self.pushButton_jieqi)
+
+        self.checkBox_3 = QCheckBox(self.verticalLayoutWidget_3)
+        self.checkBox_3.setObjectName(u"checkBox_3")
+
+        self.horizontalLayout_10.addWidget(self.checkBox_3)
+
+        self.label_13 = QLabel(self.verticalLayoutWidget_3)
+        self.label_13.setObjectName(u"label_13")
+
+        self.horizontalLayout_10.addWidget(self.label_13)
+
+        self.spinBox_jieqi_n = QSpinBox(self.verticalLayoutWidget_3)
+        self.spinBox_jieqi_n.setObjectName(u"spinBox_jieqi_n")
+
+        self.horizontalLayout_10.addWidget(self.spinBox_jieqi_n)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_10)
+
 
         self.horizontalLayout_7.addLayout(self.verticalLayout)
 
@@ -270,7 +305,7 @@ class Ui_Widget(object):
 
         self.horizontalLayoutWidget = QWidget(Widget)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(0, 300, 401, 80))
+        self.horizontalLayoutWidget.setGeometry(QRect(0, 320, 447, 80))
         self.horizontalLayout_9 = QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
@@ -283,6 +318,21 @@ class Ui_Widget(object):
         self.pushButton_start.setObjectName(u"pushButton_start")
 
         self.horizontalLayout_9.addWidget(self.pushButton_start)
+
+        self.verticalLayout_4 = QVBoxLayout()
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.checkBox = QCheckBox(self.horizontalLayoutWidget)
+        self.checkBox.setObjectName(u"checkBox")
+
+        self.verticalLayout_4.addWidget(self.checkBox)
+
+        self.checkBox_2 = QCheckBox(self.horizontalLayoutWidget)
+        self.checkBox_2.setObjectName(u"checkBox_2")
+
+        self.verticalLayout_4.addWidget(self.checkBox_2)
+
+
+        self.horizontalLayout_9.addLayout(self.verticalLayout_4)
 
         self.pushButton_zanting = QPushButton(self.horizontalLayoutWidget)
         self.pushButton_zanting.setObjectName(u"pushButton_zanting")
@@ -329,8 +379,14 @@ class Ui_Widget(object):
         self.label_11.setText(QCoreApplication.translate("Widget", u"\u5355\u5c40\u6218\u6597\u65f6\u957f", None))
         self.pushButton_yuling.setText(QCoreApplication.translate("Widget", u"\u5fa1\u7075", None))
         self.label_12.setText(QCoreApplication.translate("Widget", u"\u6267\u884c\u6b21\u6570", None))
+        self.label_4.setText(QCoreApplication.translate("Widget", u"\u5355\u5c40\u6218\u6597\u65f6\u957f", None))
+        self.pushButton_jieqi.setText(QCoreApplication.translate("Widget", u"\u5951\u7075\u7ed3\u5951", None))
+        self.checkBox_3.setText(QCoreApplication.translate("Widget", u"\u53ec\u5524", None))
+        self.label_13.setText(QCoreApplication.translate("Widget", u"\u6267\u884c\u6b21\u6570", None))
         self.pushButton_chakan.setText(QCoreApplication.translate("Widget", u"\u67e5\u770b\u4efb\u52a1", None))
         self.pushButton_start.setText(QCoreApplication.translate("Widget", u"\u5f00\u59cb\u4efb\u52a1", None))
+        self.checkBox.setText(QCoreApplication.translate("Widget", u"\u5f00\u59cb\u4efb\u52a1\u9690\u85cf\u754c\u9762", None))
+        self.checkBox_2.setText(QCoreApplication.translate("Widget", u"\u7ed3\u675f\u4efb\u52a1\u663e\u793a\u754c\u9762", None))
         self.pushButton_zanting.setText(QCoreApplication.translate("Widget", u"\u6682\u505c\u4efb\u52a1", None))
         self.pushButton_shanchu.setText(QCoreApplication.translate("Widget", u"\u5220\u9664\u4efb\u52a1", None))
     # retranslateUi

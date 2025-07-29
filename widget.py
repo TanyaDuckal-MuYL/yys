@@ -1,6 +1,7 @@
 import sys
 import os
 import win32gui
+import time
 from pynput import mouse
 from PySide6.QtWidgets import QApplication, QWidget, QFileDialog
 from PySide6.QtCore import QThread, QMutex
@@ -36,6 +37,8 @@ class Widget(QWidget):
         self.ui.spinBox_k28_n.setRange(0,999)
         self.ui.spinBox_gbyw_n.setRange(0,999)
         self.ui.spinBox_yuling_n.setRange(0,999)
+        self.ui.spinBox_jieqi.setRange(0,999)
+        self.ui.spinBox_jieqi_n.setRange(0,999)
         #待开发按键
         self.ui.pushButton_muban.setEnabled(False)
         self.ui.pushButton_jiejietupo.setEnabled(False)
@@ -60,6 +63,7 @@ class Widget(QWidget):
         self.ui.pushButton_main_window.clicked.connect(self.on_button_main_window_click)
         self.ui.pushButton_huntu_zudui.clicked.connect(self.on_button_huntu_zudui_click)
         self.ui.pushButton_k28_zudui.clicked.connect(self.on_button_k28_zudui_click)
+        self.ui.pushButton_jieqi.clicked.connect(self.on_button_jieqi_click)
         #创建文件用于记录目标窗口句柄
         if os.path.exists("hld.txt") == False:
             self.file = open("hld.txt","x")
@@ -74,7 +78,7 @@ class Widget(QWidget):
         self.lines = self.file.readlines()
         self.file.close()
         #将保存数据输入到控件
-        if len(self.lines) >= 11:
+        if len(self.lines) >= 13:
             self.ui.lineEdit_window_name.setText(self.lines[0][:-1])
             self.ui.lineEdit_window_hld.setText(self.lines[1][:-1])
             self.ui.lineEdit_path.setText(self.lines[2][:-1])
@@ -86,10 +90,16 @@ class Widget(QWidget):
             self.ui.spinBox_gbyw_n.setValue(int(self.lines[8]))
             self.ui.spinBox_yuling.setValue(int(self.lines[9]))
             self.ui.spinBox_yuling_n.setValue(int(self.lines[10]))
+            self.ui.spinBox_jieqi.setValue(int(self.lines[11]))
+            self.ui.spinBox_jieqi_n.setValue(int(self.lines[12]))
             pass
         pass
     #封装参数到字典方便传参
     def set_dictionary(self):
+        jieqi_zhaohuan = 0
+        if self.ui.checkBox_3.isChecked():
+            jieqi_zhaohuan = 1
+            pass
         self.dictionary = {'run_name':"",
         'main_window_hld':self.main_window_seted,
         'window_name':self.ui.lineEdit_window_name.text(),
@@ -102,7 +112,10 @@ class Widget(QWidget):
         'Duration_of_battle_gbyw':self.ui.spinBox_gbyw.value(),
         'Duration_of_battle_gbyw_n':self.ui.spinBox_gbyw_n.value(),
         'Duration_of_battle_yuling':self.ui.spinBox_yuling.value(),
-        'Duration_of_battle_yuling_n':self.ui.spinBox_yuling_n.value()
+        'Duration_of_battle_yuling_n':self.ui.spinBox_yuling_n.value(),
+        'Duration_of_battle_jieqi':self.ui.spinBox_jieqi.value(),
+        'Duration_of_battle_jieqi_n':self.ui.spinBox_jieqi_n.value(),
+        'jieqi_zhaohuan':jieqi_zhaohuan,
         }
         pass
     #保存参数
@@ -121,6 +134,8 @@ class Widget(QWidget):
         self.file.write(str(self.ui.spinBox_gbyw_n.value())+"\n")
         self.file.write(str(self.ui.spinBox_yuling.value())+"\n")
         self.file.write(str(self.ui.spinBox_yuling_n.value())+"\n")
+        self.file.write(str(self.ui.spinBox_jieqi.value())+"\n")
+        self.file.write(str(self.ui.spinBox_jieqi_n.value())+"\n")
         self.file.close()
         self.ui.textEdit.append("数据保存完成")
         self.pushbutton_setenabled(True)
@@ -179,6 +194,7 @@ class Widget(QWidget):
         self.ui.pushButton_main_window.setEnabled(bool_val)
         self.ui.pushButton_huntu_zudui.setEnabled(bool_val)
         self.ui.pushButton_k28_zudui.setEnabled(bool_val)
+        self.ui.pushButton_jieqi.setEnabled(bool_val)
         pass
     #收到工作任务消息
     def thread_finished(self,arg_0,arg_1):
@@ -203,6 +219,13 @@ class Widget(QWidget):
                 self.pushbutton_setenabled(True)
                 self.ui.textEdit.append("所有任务已完成")
                 self.main_window_seted = "0"
+                if self.ui.checkBox_2.isChecked():
+                    print("复选框被选中")
+                    self.showNormal()
+                    pass
+                else:
+                    print("复选框未选中")
+                    pass
                 pass
             pass
         pass
@@ -262,6 +285,10 @@ class Widget(QWidget):
     def on_button_yuling_click(self):
         self.molloc_for_thread("yuling")
         return
+    #契灵结契按键点击事件槽函数
+    def on_button_jieqi_click(self):
+        self.molloc_for_thread("jieqi")
+        return
     #mubanku按键点击事件槽函数
     def on_button_muban_click(self):
         # self.thread = QThread()
@@ -303,6 +330,14 @@ class Widget(QWidget):
         pass
     #开始按键点击事件槽函数
     def on_button_start_click(self):
+        self.ui.textEdit.append("---所有任务开始---")
+        if self.ui.checkBox.isChecked():
+            print("复选框被选中")
+            self.showMinimized()
+            pass
+        else:
+            print("复选框未选中")
+            pass
         self.file = open("hld.txt","r+",encoding="utf-8")
         self.lines = self.file.readlines()
         self.file.close()

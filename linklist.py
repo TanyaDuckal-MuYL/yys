@@ -49,16 +49,16 @@ class LinkList:
             linklist_str = linklist_str + "工作任务:" + current.data.arg["run_name"] + " "
             work_num = 0
             if current.data.arg["run_name"] == "huntu" or "huntu_zudui":
-                work_num = current.data.arg['Duration_of_battle_h11_n']
+                work_num = current.data.arg["Duration_of_battle_h11_n"]
                 pass
             elif current.data.arg["run_name"] == "k28" or "k28_zudui":
-                work_num = current.data.arg['Duration_of_battle_k28_n']
+                work_num = current.data.arg["Duration_of_battle_k28_n"]
                 pass
             elif current.data.arg["run_name"] == "gbyw":
-                work_num = current.data.arg['Duration_of_battle_gbyw_n']
+                work_num = current.data.arg["Duration_of_battle_gbyw_n"]
                 pass
             elif current.data.arg["run_name"] == "yuling":
-                work_num = current.data.arg['Duration_of_battle_yuling_n']
+                work_num = current.data.arg["Duration_of_battle_yuling_n"]
                 pass
             linklist_str = linklist_str + str(work_num) + "次" + "\n"
             current = current.next
