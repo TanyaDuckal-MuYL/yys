@@ -4,7 +4,7 @@ import win32gui
 import time
 from pynput import mouse
 from PySide6.QtWidgets import QApplication, QWidget, QFileDialog
-from PySide6.QtCore import QThread, QMutex
+from PySide6.QtCore import QThread, QMutex, Qt
 from ui_form import Ui_Widget
 # Important
 # You need to run the following command to generate the ui_form.py file
@@ -25,6 +25,8 @@ class Widget(QWidget):
         #线程锁创建
         self.mutex = QMutex()
         self.thread = None
+        # 保存初始的窗口标志
+        self.original_flags = self.windowFlags()
         #程序窗口控件设置
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
@@ -39,6 +41,8 @@ class Widget(QWidget):
         self.ui.spinBox_yuling_n.setRange(0,999)
         self.ui.spinBox_jieqi.setRange(0,999)
         self.ui.spinBox_jieqi_n.setRange(0,999)
+        self.ui.spinBox_pata.setRange(0,999)
+        self.ui.spinBox_pata_n.setRange(0,999)
         #待开发按键
         self.ui.pushButton_muban.setEnabled(False)
         self.ui.pushButton_jiejietupo.setEnabled(False)
@@ -64,6 +68,8 @@ class Widget(QWidget):
         self.ui.pushButton_huntu_zudui.clicked.connect(self.on_button_huntu_zudui_click)
         self.ui.pushButton_k28_zudui.clicked.connect(self.on_button_k28_zudui_click)
         self.ui.pushButton_jieqi.clicked.connect(self.on_button_jieqi_click)
+        self.ui.pushButton_pata.clicked.connect(self.on_button_pata_click)
+        self.ui.checkBox_4.stateChanged.connect(self.toggle_stay_on_top)
         #创建文件用于记录目标窗口句柄
         if os.path.exists("hld.txt") == False:
             self.file = open("hld.txt","x")
@@ -78,7 +84,7 @@ class Widget(QWidget):
         self.lines = self.file.readlines()
         self.file.close()
         #将保存数据输入到控件
-        if len(self.lines) >= 13:
+        if len(self.lines) >= 0:
             self.ui.lineEdit_window_name.setText(self.lines[0][:-1])
             self.ui.lineEdit_window_hld.setText(self.lines[1][:-1])
             self.ui.lineEdit_path.setText(self.lines[2][:-1])
@@ -92,6 +98,24 @@ class Widget(QWidget):
             self.ui.spinBox_yuling_n.setValue(int(self.lines[10]))
             self.ui.spinBox_jieqi.setValue(int(self.lines[11]))
             self.ui.spinBox_jieqi_n.setValue(int(self.lines[12]))
+            self.ui.spinBox_pata.setValue(int(self.lines[13]))
+            self.ui.spinBox_pata_n.setValue(int(self.lines[14]))
+            pass
+        pass
+    #根据复选框状态切换窗口置顶
+    def toggle_stay_on_top(self, state):
+        stay_on_top = state
+        self.set_stay_on_top(stay_on_top)
+        pass
+    #设置窗口是否置顶
+    def set_stay_on_top(self,stay_on_top):
+        if stay_on_top:
+            self.setWindowFlags(self.original_flags | Qt.WindowStaysOnTopHint)
+            self.show()
+            pass
+        else:
+            self.setWindowFlags(self.original_flags)
+            self.show()
             pass
         pass
     #封装参数到字典方便传参
@@ -116,6 +140,8 @@ class Widget(QWidget):
         'Duration_of_battle_jieqi':self.ui.spinBox_jieqi.value(),
         'Duration_of_battle_jieqi_n':self.ui.spinBox_jieqi_n.value(),
         'jieqi_zhaohuan':jieqi_zhaohuan,
+        'Duration_of_battle_pata':self.ui.spinBox_pata.value(),
+        'Duration_of_battle_pata_n':self.ui.spinBox_pata_n.value(),
         }
         pass
     #保存参数
@@ -136,6 +162,8 @@ class Widget(QWidget):
         self.file.write(str(self.ui.spinBox_yuling_n.value())+"\n")
         self.file.write(str(self.ui.spinBox_jieqi.value())+"\n")
         self.file.write(str(self.ui.spinBox_jieqi_n.value())+"\n")
+        self.file.write(str(self.ui.spinBox_pata.value())+"\n")
+        self.file.write(str(self.ui.spinBox_pata_n.value())+"\n")
         self.file.close()
         self.ui.textEdit.append("数据保存完成")
         self.pushbutton_setenabled(True)
@@ -195,6 +223,7 @@ class Widget(QWidget):
         self.ui.pushButton_huntu_zudui.setEnabled(bool_val)
         self.ui.pushButton_k28_zudui.setEnabled(bool_val)
         self.ui.pushButton_jieqi.setEnabled(bool_val)
+        self.ui.pushButton_pata.setEnabled(bool_val)
         pass
     #收到工作任务消息
     def thread_finished(self,arg_0,arg_1):
@@ -288,6 +317,10 @@ class Widget(QWidget):
     #契灵结契按键点击事件槽函数
     def on_button_jieqi_click(self):
         self.molloc_for_thread("jieqi")
+        return
+    #活动爬塔按键点击事件槽函数
+    def on_button_pata_click(self):
+        self.molloc_for_thread("pata")
         return
     #mubanku按键点击事件槽函数
     def on_button_muban_click(self):
