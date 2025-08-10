@@ -35,14 +35,14 @@ class Widget(QWidget):
         #设置输出控件背景文案显示
         self.ui.textEdit.setPlaceholderText("应用程序输出")
         #修改计数器范围
-        self.ui.spinBox_huntu_n.setRange(0,999)
-        self.ui.spinBox_k28_n.setRange(0,999)
-        self.ui.spinBox_gbyw_n.setRange(0,999)
-        self.ui.spinBox_yuling_n.setRange(0,999)
-        self.ui.spinBox_jieqi.setRange(0,999)
-        self.ui.spinBox_jieqi_n.setRange(0,999)
-        self.ui.spinBox_pata.setRange(0,999)
-        self.ui.spinBox_pata_n.setRange(0,999)
+        self.ui.spinBox_huntu_n.setRange(0,9999)
+        self.ui.spinBox_k28_n.setRange(0,9999)
+        self.ui.spinBox_gbyw_n.setRange(0,9999)
+        self.ui.spinBox_yuling_n.setRange(0,9999)
+        self.ui.spinBox_jieqi.setRange(0,9999)
+        self.ui.spinBox_jieqi_n.setRange(0,9999)
+        self.ui.spinBox_pata.setRange(0,9999)
+        self.ui.spinBox_pata_n.setRange(0,9999)
         #待开发按键
         self.ui.pushButton_muban.setEnabled(False)
         self.ui.pushButton_jiejietupo.setEnabled(False)
