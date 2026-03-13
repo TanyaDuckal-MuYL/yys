@@ -290,6 +290,75 @@
           </item>
          </layout>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>单局战斗时长</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_jieqi"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_jieqi">
+            <property name="text">
+             <string>契灵结契</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_3">
+            <property name="text">
+             <string>召唤</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>执行次数</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_jieqi_n"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>单局战斗时长</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_pata"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_pata">
+            <property name="text">
+             <string>爬塔</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>执行次数</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_pata_n"/>
+          </item>
+         </layout>
+        </item>
        </layout>
       </item>
      </layout>
@@ -300,8 +369,8 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>300</y>
-     <width>401</width>
+     <y>320</y>
+     <width>447</width>
      <height>80</height>
     </rect>
    </property>
@@ -321,6 +390,24 @@
      </widget>
     </item>
     <item>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>开始任务隐藏界面</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>结束任务显示界面</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QPushButton" name="pushButton_zanting">
       <property name="text">
        <string>暂停任务</string>
@@ -335,6 +422,19 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_4">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>320</y>
+     <width>80</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>窗体置顶</string>
+   </property>
   </widget>
  </widget>
  <resources/>

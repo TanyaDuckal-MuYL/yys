@@ -129,6 +129,8 @@ class WorkerProcess(QThread):
         self.jiejietupo_shibai = self.path + "jiejietupo_shibai.png"
         self.jiejietupo_shibai_anniu = self.path + "jiejietupo_shibai_anniu.png"
         self.jiejietupo_shuaxin = self.path + "jiejietupo_shuaxin.png"
+        self.battle_zhuye = self.path + "battle_zhuye.png"
+        self.battle_tiaozhan = self.path + "battle_tiaozhan.png"
         pass
     #截图目标模板并保存到路径str_path
     def get_muban_picture(self,str_path,x,y,width,height):
@@ -392,7 +394,7 @@ class WorkerProcess(QThread):
             #操作_司机窗口
             current_hld = self.hld
             self.get_current_picture(self.zudui_zhuye,current_hld)
-            self.click_picture(self.zudui_zhuye,self.k28_tiaozhan_zudui,0,0,self.get_time_quick(),current_hld)
+            self.click_picture(self.zudui_zhuye,self.k28_tiaozhan_zudui,0,0,0.1,current_hld)
             time.sleep(2)
             self.get_current_picture(self.k28_init,current_hld)
             png_1 = self.open_picture(self.k28_init)
@@ -400,9 +402,9 @@ class WorkerProcess(QThread):
             max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
             #没有怪物
             if self.THRESHOLD > max_val:
-                time.sleep(1)
+                #time.sleep(1)
                 self.click_and_move("left",current_hld)
-                time.sleep(1)
+                #time.sleep(1)
                 pass
             #有怪物
             else:
@@ -416,21 +418,21 @@ class WorkerProcess(QThread):
                 time.sleep(self.Duration_of_battle_k28)
                 #打手结算
                 current_hld = self.main_window_hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 #司机结算
                 current_hld = self.hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 time.sleep(1.5)
                 #打手结算
                 current_hld = self.main_window_hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 #司机结算
                 current_hld = self.hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 #time.sleep(2)
                 pass
             if s == 7:
@@ -445,21 +447,21 @@ class WorkerProcess(QThread):
                 time.sleep(self.Duration_of_battle_k28+2)
                 #打手结算
                 current_hld = self.main_window_hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 #司机结算
                 current_hld = self.hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 time.sleep(1.5)
                 #打手结算
                 current_hld = self.main_window_hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 #司机结算
                 current_hld = self.hld
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
-                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,self.get_time_quick(),current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
+                self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,current_hld)
                 #time.sleep(1)
                 time.sleep(2)
                 self.get_current_picture(self.k28_init,current_hld)
@@ -622,10 +624,10 @@ class WorkerProcess(QThread):
         s = 0
         sl = 0
         n1 = 0
-        self.get_current_picture(self.zhuye,self.hld)
-        self.thread_mutex_lock()
-        self.click_picture(self.zhuye,self.tansuo,0,0,self.get_time(),self.hld)
-        self.thread_mutex_unlock()
+        #self.get_current_picture(self.zhuye,self.hld)
+        #self.thread_mutex_lock()
+        #self.click_picture(self.zhuye,self.tansuo,0,0,self.get_time(),self.hld)
+        #self.thread_mutex_unlock()
         time.sleep(2)
         self.get_current_picture(self.tansuo_zhuye,self.hld)
         self.thread_mutex_lock()
@@ -736,6 +738,7 @@ class WorkerProcess(QThread):
                     self.thread_mutex_unlock()
                     pass
                 self.send_to_UI("k28执行次数={},体力开销={},剩余次数={}".format(n1,n1*24,self.n))
+                time.sleep(2)
                 pass
             pass
         self.send_to_UI("---k28执行完毕---花费体力{}---".format(n1*24))
@@ -752,10 +755,10 @@ class WorkerProcess(QThread):
     #阴阳师御灵副本逻辑实现
     def yys_yuling(self):
         n1 = 0
-        self.get_current_picture(self.zhuye,self.hld)
-        self.thread_mutex_lock()
-        self.click_picture(self.zhuye,self.tansuo,0,0,self.get_time(),self.hld)
-        self.thread_mutex_unlock()
+        #self.get_current_picture(self.zhuye,self.hld)
+        #self.thread_mutex_lock()
+        #self.click_picture(self.zhuye,self.tansuo,0,0,self.get_time(),self.hld)
+        #self.thread_mutex_unlock()
         time.sleep(2)
         self.get_current_picture(self.tansuo_zhuye,self.hld)
         self.thread_mutex_lock()
@@ -766,7 +769,13 @@ class WorkerProcess(QThread):
         current_datetime = datetime.datetime.now()
         weekday = current_datetime.weekday()
         if weekday > 4:
-            weekday -= 3#周五打白藏主，周六打黑豹
+            weekday = weekday // 4
+            #if weekday == 5:
+            #    weekday -= 4#周六打神龙
+            #    pass
+            #if weekday == 6:
+            #    weekday -=2#周日打孔雀
+            #    pass
             pass
         elif weekday == 0:
             self.send_to_UI("无法挑战，周一不开放御灵副本")
@@ -774,19 +783,19 @@ class WorkerProcess(QThread):
         self.yuling_mubiao = self.yuling_mubiaoku[weekday - 1]
         self.get_current_picture(self.yuling_zhuye,self.hld)
         self.thread_mutex_lock()
-        self.click_picture(self.yuling_zhuye,self.yuling_mubiao,0,0,self.get_time(),self.hld)
+        self.click_picture(self.yuling_zhuye,self.yuling_mubiao,0,0,self.get_time_quick(),self.hld)
         self.thread_mutex_unlock()
         time.sleep(1)
         #完成星期判断
         self.get_current_picture(self.yuling_zhuye,self.hld)
         self.thread_mutex_lock()
-        self.click_picture(self.yuling_zhuye,self.yuling_san,0,0,self.get_time(),self.hld)
+        self.click_picture(self.yuling_zhuye,self.yuling_san,0,0,self.get_time_quick(),self.hld)
         self.thread_mutex_unlock()
         self.send_to_UI("---御灵副本开始执行---循环{}次".format(self.n))
         while self.n != 0:
             n1 += 1
             self.thread_mutex_lock()
-            self.click_picture(self.yuling_zhuye,self.yuling_tiaozhan,0,0,self.get_time(),self.hld)
+            self.click_picture(self.yuling_zhuye,self.yuling_tiaozhan,0,0,self.get_time_quick(),self.hld)
             self.thread_mutex_unlock()
             time.sleep(self.Duration_of_battle_yuling)
             self.thread_mutex_lock()
@@ -979,6 +988,24 @@ class WorkerProcess(QThread):
                 pass
             pass
         pass
+    #阴阳师活动爬塔逻辑实现
+    def yys_pata(self):
+        n1 = 0
+        self.send_to_UI("---活动爬塔开始执行---循环{}次".format(self.n))
+        while self.n != 0:
+            time.sleep(1)
+            self.send_to_UI("     活动爬塔剩余次数={}".format(self.n))
+            self.get_current_picture(self.battle_zhuye,self.hld)
+            self.click_picture(self.battle_zhuye,self.battle_tiaozhan,0,0,0.1,self.hld)
+            time.sleep(self.Duration_of_battle_pata)
+            self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,self.hld)
+            self.n -= 1
+            n1 += 1
+            self.send_to_UI("     活动爬塔执行次数={},门票开销={}".format(n1,n1))
+            time.sleep(2)
+            pass
+        self.send_to_UI("---活动爬塔执行完毕---花费门票{}---".format(n1))
+        pass
     def ceshi(self):
         # 循环10次，每秒钟传递一次时间给UI
         n = 10
@@ -1030,6 +1057,7 @@ class WorkerProcess(QThread):
         self.Duration_of_battle_gbyw = self.arg['Duration_of_battle_gbyw']
         self.Duration_of_battle_yuling = self.arg['Duration_of_battle_yuling']
         self.Duration_of_battle_qiling = self.arg['Duration_of_battle_jieqi']
+        self.Duration_of_battle_pata = self.arg['Duration_of_battle_pata']
         self.update_mubanku()
         self.start_time = time.time()
         if self.arg['run_name'] == "ceshi":
@@ -1070,6 +1098,11 @@ class WorkerProcess(QThread):
         elif self.arg['run_name'] == "jieqi":
             self.n = self.arg['Duration_of_battle_jieqi_n']
             self.yys_jieqi()
+            pass
+        elif self.arg['run_name'] == "pata":
+            self.n = self.arg['Duration_of_battle_pata_n']
+            self.yys_pata()
+            pass
         self.end_time = time.time()
         self.m, self.s = divmod(self.end_time-self.start_time, 60)
         self.h, self.m = divmod(self.m, 60)

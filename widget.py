@@ -10,6 +10,7 @@ from ui_form import Ui_Widget
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
+# cd /d D:\QT\my_project\yys
 # pyinstaller -F widget.py linklist.py yys_work.py --hidden-import PySide6.QtSvg --paths  c:\users\22953\appdata\local\programs\python\python38\lib\site-packages\shiboken6.abi3.dll -w --exclude PyQt5
 
 #引入工作任务类
@@ -84,7 +85,7 @@ class Widget(QWidget):
         self.lines = self.file.readlines()
         self.file.close()
         #将保存数据输入到控件
-        if len(self.lines) >= 0:
+        if len(self.lines) > 0:
             self.ui.lineEdit_window_name.setText(self.lines[0][:-1])
             self.ui.lineEdit_window_hld.setText(self.lines[1][:-1])
             self.ui.lineEdit_path.setText(self.lines[2][:-1])

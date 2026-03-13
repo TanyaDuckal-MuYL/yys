@@ -297,6 +297,36 @@ class Ui_Widget(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_10)
 
+        self.horizontalLayout_11 = QHBoxLayout()
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.label_14 = QLabel(self.verticalLayoutWidget_3)
+        self.label_14.setObjectName(u"label_14")
+
+        self.horizontalLayout_11.addWidget(self.label_14)
+
+        self.spinBox_pata = QSpinBox(self.verticalLayoutWidget_3)
+        self.spinBox_pata.setObjectName(u"spinBox_pata")
+
+        self.horizontalLayout_11.addWidget(self.spinBox_pata)
+
+        self.pushButton_pata = QPushButton(self.verticalLayoutWidget_3)
+        self.pushButton_pata.setObjectName(u"pushButton_pata")
+
+        self.horizontalLayout_11.addWidget(self.pushButton_pata)
+
+        self.label_15 = QLabel(self.verticalLayoutWidget_3)
+        self.label_15.setObjectName(u"label_15")
+
+        self.horizontalLayout_11.addWidget(self.label_15)
+
+        self.spinBox_pata_n = QSpinBox(self.verticalLayoutWidget_3)
+        self.spinBox_pata_n.setObjectName(u"spinBox_pata_n")
+
+        self.horizontalLayout_11.addWidget(self.spinBox_pata_n)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_11)
+
 
         self.horizontalLayout_7.addLayout(self.verticalLayout)
 
@@ -344,6 +374,9 @@ class Ui_Widget(object):
 
         self.horizontalLayout_9.addWidget(self.pushButton_shanchu)
 
+        self.checkBox_4 = QCheckBox(Widget)
+        self.checkBox_4.setObjectName(u"checkBox_4")
+        self.checkBox_4.setGeometry(QRect(490, 320, 80, 19))
 
         self.retranslateUi(Widget)
 
@@ -383,11 +416,15 @@ class Ui_Widget(object):
         self.pushButton_jieqi.setText(QCoreApplication.translate("Widget", u"\u5951\u7075\u7ed3\u5951", None))
         self.checkBox_3.setText(QCoreApplication.translate("Widget", u"\u53ec\u5524", None))
         self.label_13.setText(QCoreApplication.translate("Widget", u"\u6267\u884c\u6b21\u6570", None))
+        self.label_14.setText(QCoreApplication.translate("Widget", u"\u5355\u5c40\u6218\u6597\u65f6\u957f", None))
+        self.pushButton_pata.setText(QCoreApplication.translate("Widget", u"\u722c\u5854", None))
+        self.label_15.setText(QCoreApplication.translate("Widget", u"\u6267\u884c\u6b21\u6570", None))
         self.pushButton_chakan.setText(QCoreApplication.translate("Widget", u"\u67e5\u770b\u4efb\u52a1", None))
         self.pushButton_start.setText(QCoreApplication.translate("Widget", u"\u5f00\u59cb\u4efb\u52a1", None))
         self.checkBox.setText(QCoreApplication.translate("Widget", u"\u5f00\u59cb\u4efb\u52a1\u9690\u85cf\u754c\u9762", None))
         self.checkBox_2.setText(QCoreApplication.translate("Widget", u"\u7ed3\u675f\u4efb\u52a1\u663e\u793a\u754c\u9762", None))
         self.pushButton_zanting.setText(QCoreApplication.translate("Widget", u"\u6682\u505c\u4efb\u52a1", None))
         self.pushButton_shanchu.setText(QCoreApplication.translate("Widget", u"\u5220\u9664\u4efb\u52a1", None))
+        self.checkBox_4.setText(QCoreApplication.translate("Widget", u"\u7a97\u4f53\u7f6e\u9876", None))
     # retranslateUi
 
