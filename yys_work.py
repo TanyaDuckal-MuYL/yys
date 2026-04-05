@@ -1030,7 +1030,29 @@ class WorkerProcess(QThread):
             print("Folder created")
             # 遍历文件列表，拷贝每个文件
             for file_path in src_files:
-                shutil.copy(file_path, self.path)
+                # 判断是否为文件夹
+                if os.path.isdir(file_path):
+                    # 逻辑一：处理文件夹
+                    print(f"检测到文件夹，正在删除: {file_path}")
+                    try:
+                        # 使用 shutil.rmtree 递归删除文件夹及其内容
+                        shutil.rmtree(file_path)
+                        print(f"文件夹删除成功: {file_path}")
+                        pass
+                    except Exception as e:
+                        print(f"删除文件夹失败 {file_path}: {e}")
+                        pass
+                    pass
+                # 判断是否为图片文件
+                elif os.path.isfile(file_path) and file_path.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp')):
+                    # 逻辑二：处理图片文件
+                    print(f"处理图片文件: {file_path}")
+                    shutil.copy(file_path, self.path)
+                    pass
+                # 其他文件类型
+                elif os.path.isfile(file_path):
+                    print(f"处理其他文件: {file_path}")
+                    pass
                 pass
             pass
         else:
