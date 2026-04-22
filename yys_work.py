@@ -65,6 +65,7 @@ class WorkerProcess(QThread):
         self.zhuye = self.path + "zhuye.png"
         self.tansuo = self.path + "tansuo.png"
         self.tansuo_zhuye = self.path + "tansuo_zhuye.png"
+        self.tansuo_xiaoren = self.path + "tansuo_xiaoren.png"
         self.tansuo_fanhui = self.path + "tansuo_fanhui.png"
         self.yuhun = self.path + "yuhun.png"
         self.yuhun_zhuye = self.path + "yuhun_zhuye.png"
@@ -172,8 +173,15 @@ class WorkerProcess(QThread):
         self.get_window_coordinate(hld)
         pyautogui.moveTo((self.left+self.right)/2,self.top+self.Vertical_dimensions/2)
         pyautogui.mouseDown(button='left')
-        pyautogui.moveTo(self.left,self.top+self.Vertical_dimensions/2,self.get_time_quick()) if str_direction == "left" else pyautogui.moveTo(self.right,self.top+self.Vertical_dimensions/2,self.get_time())
-        pyautogui.mouseUp(x=self.left,button='left')
+        if str_direction == "left":
+            pyautogui.moveTo(self.left,self.top+self.Vertical_dimensions/2,self.get_time_quick())
+            pyautogui.mouseUp(x=self.left,button='left')
+            pass
+        else:
+            pyautogui.moveTo(self.right,self.top+self.Vertical_dimensions/2,self.get_time_quick())
+            pyautogui.mouseUp(x=self.right,button='left')
+            pass
+        #pyautogui.mouseUp(x=self.left,button='left')
         return
     #截图目标窗口并保存到路径str_path
     def get_current_picture(self,str_path,hld):
@@ -243,6 +251,7 @@ class WorkerProcess(QThread):
         png_2 = self.open_picture(p2_str)
         x, y = self.find_template(png_1,png_2,j,k)
         if (x,y) == (0,0):
+            self.send_to_UI("find false> {} find {}",format(p1_str,p2_str))
             return (x,y)
         self.click_coordinate(x,y,t)
         return (x,y)
@@ -624,15 +633,16 @@ class WorkerProcess(QThread):
         s = 0
         sl = 0
         n1 = 0
+        m = -10.0
         #self.get_current_picture(self.zhuye,self.hld)
         #self.thread_mutex_lock()
         #self.click_picture(self.zhuye,self.tansuo,0,0,self.get_time(),self.hld)
         #self.thread_mutex_unlock()
-        time.sleep(2)
-        self.get_current_picture(self.tansuo_zhuye,self.hld)
-        self.thread_mutex_lock()
-        self.click_picture(self.tansuo_zhuye,self.k28,0,0,self.get_time(),self.hld)
-        self.thread_mutex_unlock()
+        #time.sleep(2)
+        #self.get_current_picture(self.tansuo_zhuye,self.hld)
+        #self.thread_mutex_lock()
+        #self.click_picture(self.tansuo_zhuye,self.k28,0,0,self.get_time(),self.hld)
+        #self.thread_mutex_unlock()
         time.sleep(2)
         self.get_current_picture(self.k28_zhuye,self.hld)
         self.thread_mutex_lock()
@@ -653,7 +663,16 @@ class WorkerProcess(QThread):
             #没有怪物
             if self.THRESHOLD > max_val:
                 #time.sleep(1)
-                self.click_and_move("left",self.hld)
+                if m <= 0:
+                    self.click_and_move("left",self.hld)
+                    m = m + 1.0
+                    pass
+                else:
+                    self.click_and_move("right",self.hld)
+                    m = m - 0.1
+                    if m == 0.0:
+                        m = -10.0
+                        pass
                 #time.sleep(1)
                 pass
             #有怪物
@@ -712,25 +731,41 @@ class WorkerProcess(QThread):
                 self.thread_mutex_lock()
                 self.get_current_picture(self.k28_init,self.hld)
                 png_1 = self.open_picture(self.k28_init)
-                png_2 = self.open_picture(self.k28)
+                png_2 = self.open_picture(self.k28_baoxiang)
                 max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
                 #有宝箱
-                if self.THRESHOLD > max_val:
+                if self.THRESHOLD < max_val:
                     self.click_picture(self.k28_init,self.k28_fanhui,0,0,0.1,self.hld)
                     #self.get_current_picture(self.k28_fanhui_zhuye,self.hld)
                     self.click_picture(self.k28_fanhui_zhuye,self.k28_queren,0,0,0.1,self.hld)
+                    time.sleep(2)
                     pass
                 self.thread_mutex_unlock()
-                time.sleep(2)
                 s = 0
                 sl = 0
                 self.n -= 1
                 n1 += 1
+                m = -10.0
+                time.sleep(2)
                 if self.n != 0:
+                    time.sleep(2)
                     self.thread_mutex_lock()
-                    self.get_current_picture(self.tansuo_zhuye,self.hld)
-                    self.click_picture(self.tansuo_zhuye,self.k28,0,0,0.1,self.hld)
+                    self.get_current_picture(self.k28_init,self.hld)
+                    png_1 = self.open_picture(self.k28_init)
+                    png_2 = self.open_picture(self.k28_kunnan)
+                    max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
+                    #有妖气
+                    if self.THRESHOLD > max_val:
+                        self.get_current_picture(self.tansuo_zhuye,self.hld)
+                        #self.click_picture(self.tansuo_zhuye,self.tansuo_xiaoren,0,0,0.1,self.hld)
+                        #time.sleep(2)
+                        self.click_coordinate(self.left+500,self.top+400,self.get_time_quick())
+                        pass
                     self.thread_mutex_unlock()
+                    #self.thread_mutex_lock()
+                    #self.get_current_picture(self.tansuo_zhuye,self.hld)
+                    #self.click_picture(self.tansuo_zhuye,self.tansuo_xiaoren,0,0,0.1,self.hld)
+                    #self.thread_mutex_unlock()
                     time.sleep(1)
                     self.thread_mutex_lock()
                     self.click_picture(self.k28_zhuye,self.k28_kunnan,0,0,0.1,self.hld)
@@ -742,15 +777,15 @@ class WorkerProcess(QThread):
                 pass
             pass
         self.send_to_UI("---k28执行完毕---花费体力{}---".format(n1*24))
-        self.thread_mutex_lock()
-        self.click_picture(self.k28_zhuye,self.k28_guanbi,0,0,self.get_time(),self.hld)
-        self.thread_mutex_unlock()
-        time.sleep(2)
-        self.get_current_picture(self.tansuo_zhuye,self.hld)
-        self.send_to_UI("---返回主页---")
-        self.thread_mutex_lock()
-        self.click_picture(self.tansuo_zhuye,self.tansuo_fanhui,0,0,self.get_time(),self.hld)
-        self.thread_mutex_unlock()
+        #self.thread_mutex_lock()
+        #self.click_picture(self.k28_zhuye,self.k28_guanbi,0,0,self.get_time(),self.hld)
+        #self.thread_mutex_unlock()
+        #time.sleep(2)
+        #self.get_current_picture(self.tansuo_zhuye,self.hld)
+        #self.send_to_UI("---返回主页---")
+        #self.thread_mutex_lock()
+        #self.click_picture(self.tansuo_zhuye,self.tansuo_fanhui,0,0,self.get_time(),self.hld)
+        #self.thread_mutex_unlock()
         pass
     #阴阳师御灵副本逻辑实现
     def yys_yuling(self):
