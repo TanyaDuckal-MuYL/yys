@@ -251,7 +251,7 @@ class WorkerProcess(QThread):
         png_2 = self.open_picture(p2_str)
         x, y = self.find_template(png_1,png_2,j,k)
         if (x,y) == (0,0):
-            self.send_to_UI("find false> {} find {}",format(p1_str,p2_str))
+            self.send_to_UI("find false> {} find {}".format(p1_str,p2_str))
             return (x,y)
         self.click_coordinate(x,y,t)
         return (x,y)
@@ -671,6 +671,7 @@ class WorkerProcess(QThread):
                     self.click_and_move("right",self.hld)
                     m = m - 0.1
                     if m == 0.0:
+                        s = s + 1
                         m = -10.0
                         pass
                 #time.sleep(1)
@@ -727,47 +728,46 @@ class WorkerProcess(QThread):
                 self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,self.hld)
                 self.click_picture(self.jiesuan_zhuye,self.jiesuan_damo,1,0,0.1,self.hld)
                 self.thread_mutex_unlock()
-                time.sleep(4)
+                time.sleep(2)
                 self.thread_mutex_lock()
                 self.get_current_picture(self.k28_init,self.hld)
                 png_1 = self.open_picture(self.k28_init)
-                png_2 = self.open_picture(self.k28_baoxiang)
-                max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
+                self.click_picture(self.k28_init,self.k28_fanhui,0,0,0.1,self.hld)
+                self.click_picture(self.k28_fanhui_zhuye,self.k28_queren,0,0,0.1,self.hld)
+                #png_2 = self.open_picture(self.k28_baoxiang)
+                #max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
                 #有宝箱
-                if self.THRESHOLD < max_val:
-                    self.click_picture(self.k28_init,self.k28_fanhui,0,0,0.1,self.hld)
+                #if self.THRESHOLD < max_val:
+                    #self.click_picture(self.k28_init,self.k28_fanhui,0,0,0.1,self.hld)
                     #self.get_current_picture(self.k28_fanhui_zhuye,self.hld)
-                    self.click_picture(self.k28_fanhui_zhuye,self.k28_queren,0,0,0.1,self.hld)
-                    time.sleep(2)
-                    pass
+                    #self.click_picture(self.k28_fanhui_zhuye,self.k28_queren,0,0,0.1,self.hld)
+                    #time.sleep(2)
+                    #pass
                 self.thread_mutex_unlock()
                 s = 0
                 sl = 0
                 self.n -= 1
                 n1 += 1
                 m = -10.0
-                time.sleep(2)
                 if self.n != 0:
                     time.sleep(2)
-                    self.thread_mutex_lock()
+                    #2026.04.26/*内部循环判定当前界面，非探索界面点击kun28坐标*/
                     self.get_current_picture(self.k28_init,self.hld)
                     png_1 = self.open_picture(self.k28_init)
                     png_2 = self.open_picture(self.k28_kunnan)
                     max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
-                    #有妖气
-                    if self.THRESHOLD > max_val:
-                        self.get_current_picture(self.tansuo_zhuye,self.hld)
-                        #self.click_picture(self.tansuo_zhuye,self.tansuo_xiaoren,0,0,0.1,self.hld)
-                        #time.sleep(2)
+                    while(self.THRESHOLD > max_val):#困28图标匹配失败
+                        self.thread_mutex_lock()
                         self.click_coordinate(self.left+500,self.top+400,self.get_time_quick())
+                        self.thread_mutex_unlock()
+                        self.get_current_picture(self.k28_init,self.hld)
+                        png_1 = self.open_picture(self.k28_init)
+                        max_val,max_loc = self.get_max_val_find_template(png_1,png_2)
                         pass
-                    self.thread_mutex_unlock()
-                    #self.thread_mutex_lock()
-                    #self.get_current_picture(self.tansuo_zhuye,self.hld)
-                    #self.click_picture(self.tansuo_zhuye,self.tansuo_xiaoren,0,0,0.1,self.hld)
-                    #self.thread_mutex_unlock()
-                    time.sleep(1)
+                    #2026.04.26/*匹配成功*/
+                    time.sleep(2)
                     self.thread_mutex_lock()
+                    self.click_coordinate(self.left+500,self.top+400,self.get_time_quick())
                     self.click_picture(self.k28_zhuye,self.k28_kunnan,0,0,0.1,self.hld)
                     self.click_picture(self.k28_zhuye,self.k28_tansuo,0,0,0.1,self.hld)
                     self.thread_mutex_unlock()
