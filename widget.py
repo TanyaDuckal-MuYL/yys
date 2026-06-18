@@ -4,7 +4,7 @@ import win32gui
 import time
 from pynput import mouse
 from PySide6.QtWidgets import QApplication, QWidget, QFileDialog
-from PySide6.QtCore import QThread, QMutex, Qt
+from PySide6.QtCore import QThread, QMutex, Qt, QDateTime, QTimer
 from ui_form import Ui_Widget
 # Important
 # You need to run the following command to generate the ui_form.py file
@@ -35,6 +35,10 @@ class Widget(QWidget):
         # self.ui.verticalLayout_3.setSizeConstraint(QLayout.SetFixedSize)
         #设置输出控件背景文案显示
         self.ui.textEdit.setPlaceholderText("应用程序输出")
+        # 初始化 dateTimeEdit 为程序启动时的当前时间
+        current_time = QDateTime.currentDateTime()  # 获取当前系统时间（含日期和时间）
+        self.ui.dateTimeEdit.setDateTime(current_time)  # 将时间设置到 dateTimeEdit 控件
+        self.timer = None
         #修改计数器范围
         self.ui.spinBox_huntu_n.setRange(0,9999)
         self.ui.spinBox_k28_n.setRange(0,9999)
@@ -71,6 +75,8 @@ class Widget(QWidget):
         self.ui.pushButton_jieqi.clicked.connect(self.on_button_jieqi_click)
         self.ui.pushButton_pata.clicked.connect(self.on_button_pata_click)
         self.ui.checkBox_4.stateChanged.connect(self.toggle_stay_on_top)
+        self.ui.pushButton.clicked.connect(self.dingshi_k28)
+        self.ui.pushButton_2.clicked.connect(self.dingshi_k28_quxiao)
         #创建文件用于记录目标窗口句柄
         if os.path.exists("hld.txt") == False:
             self.file = open("hld.txt","x")
@@ -286,6 +292,37 @@ class Widget(QWidget):
         else:
             self.ui.textEdit.append("该窗口已存在任务，无法重复添加")
             self.ui.textEdit.append("如需重新设置任务，请删除后再试")
+        pass
+    #定时执行k28
+    def dingshi_k28(self):
+        self.on_button_k28_click()
+        target_dt = self.ui.dateTimeEdit.dateTime()
+        now = QDateTime.currentDateTime()
+        diff_ms = now.msecsTo(target_dt)
+        if diff_ms > 0:
+            self.timer = QTimer.singleShot(diff_ms, self.on_button_start_click)
+            pass
+        else:
+            self.on_button_start_click()
+            self.timer = None
+            pass
+        time_format = "yyyy:MM:dd----HH:mm"
+        formatted_time_str = target_dt.toString(time_format)
+        self.ui.textEdit.append("k28将于"+formatted_time_str+"开始")
+        pass
+    #取消定时
+    def dingshi_k28_quxiao(self):
+        print(self.timer)
+        # 检查是否有活跃的定时任务
+        if self.timer != None:
+            self.timer.stop()       # 停止定时器
+            self.timer = None       # 重置为 None，标记无活跃任务
+            self.ui.textEdit.append("定时任务已取消")  # 可选：输出日志确认
+            self.on_button_shanchu_click()
+            pass
+        else:
+            self.ui.textEdit.append("无活跃定时任务，无需取消")
+            pass
         pass
     #组队huntu按键点击事件槽函数
     def on_button_huntu_zudui_click(self):
